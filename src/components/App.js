@@ -1,8 +1,11 @@
 import React from 'react'
+import Square from './Square/Square'
 
 const App = () => {
     return (
-        <div>Hello</div>
+        <div>
+            <Square />
+        </div>
     )
 }
 
