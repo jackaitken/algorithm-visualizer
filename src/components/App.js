@@ -1,10 +1,10 @@
 import React from 'react'
-import Square from './Square/Square'
+import Game from './Game/Game'
 
 const App = () => {
     return (
         <div>
-            <Square />
+            <Game />
         </div>
     )
 }

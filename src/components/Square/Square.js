@@ -1,22 +1,20 @@
 import React from 'react'
-import './Square.css'
 
-const Square = () => {
-
-    const handleClick = () => {
-        alert('click')
-    }
-
-    let content = [];
-    for (let i = 0; i < 10; i++) {
-        content.push(<button className={'square'} onClick={handleClick} key={i}></button>)
-    }
-
-    return (
-        <div>
-            {content}
-        </div>
-    )
+const style = {
+    background: 'lightgray',
+    border: '2px solid black',
+    fontSize: '20px',
+    fontWeight: '400',
+    cursor: 'pointer',
+    outline: 'none',
+    fontFamily: 'sans-serif'
 }
+
+const Square = ({ value, onClick }) => (
+    <button style={style} onClick={onClick}>
+        {value}
+    </button>
+)
+
 
 export default Square
