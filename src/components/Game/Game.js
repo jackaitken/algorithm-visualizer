@@ -8,12 +8,21 @@ const Game = () => {
     const [xIsNext, setXisNext] = useState(true);
     const winner = calculateWinner(board);
 
-    const handleClick = () => {
+    const handleClick = (i) => {
+        // Create shallow copy of board
+        const copyOfBoard = [...board];
 
+        if (winner || copyOfBoard[i]) {
+            return;
+        }
+
+        copyOfBoard[i] = xIsNext ? 'X' : 'O';
+        setBoard(copyOfBoard);
+        setXisNext(!xIsNext)
     }
 
     const renderMoves = () => {
-
+        return <button onClick={() => setBoard}></button>
     }
 
 
