@@ -7,7 +7,7 @@ const style = {
     height: '750px',
     margin: '0 auto',
     display: 'grid',
-    paddingTop: '50px',
+    paddingTop: '75px',
     gridTemplate: 'repeat(50, 1fr) / repeat(50, 1fr)',
 
 }
