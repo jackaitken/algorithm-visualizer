@@ -4,7 +4,7 @@ import Board from '../Board/Board';
 
 const Game = () => {
 
-    const [board, setBoard] = useState(Array(9).fill(null));
+    const [board, setBoard] = useState(Array(2500).fill(null));
     const [xIsNext, setXisNext] = useState(true);
     const winner = calculateWinner(board);
 

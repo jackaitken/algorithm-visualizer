@@ -2,7 +2,7 @@ import React from 'react'
 
 const style = {
     background: 'lightgray',
-    border: '2px solid black',
+    border: '1px solid black',
     fontSize: '20px',
     fontWeight: '400',
     cursor: 'pointer',

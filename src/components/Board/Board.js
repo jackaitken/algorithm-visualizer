@@ -2,20 +2,20 @@ import React from 'react'
 import Square from '../Square/Square'
 
 const style = {
-    paddingTop: '150px',
     borderRadius: '2px',
-    width: '250px',
-    height: '250px',
+    width: '800px',
+    height: '750px',
     margin: '0 auto',
     display: 'grid',
-    gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
+    paddingTop: '50px',
+    gridTemplate: 'repeat(50, 1fr) / repeat(50, 1fr)',
 
 }
 
 const Board = ({ squares, onClick }) => (
     <div style={style}>
         {squares.map((square, i) => (
-            <Square key={i} value={square} onClick={() => onClick()} />
+            <Square key={i} value={square} onClick={() => onClick(console.log(i))} />
         ))}
     </div>
 )
