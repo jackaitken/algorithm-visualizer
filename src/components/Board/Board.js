@@ -2,6 +2,7 @@ import React from 'react'
 import Square from '../Square/Square'
 
 const style = {
+    paddingTop: '150px',
     borderRadius: '2px',
     width: '250px',
     height: '250px',
@@ -13,15 +14,9 @@ const style = {
 
 const Board = ({ squares, onClick }) => (
     <div style={style}>
-        <Square value='1' onClick={() => onClick('value value')} />
-        <Square value='2' onClick={() => onClick('value value')} />
-        <Square value='3' onClick={() => onClick('value value')} />
-        <Square value='4' onClick={() => onClick('value value')} />
-        <Square value='5' onClick={() => onClick('value value')} />
-        <Square value='6' onClick={() => onClick('value value')} />
-        <Square value='7' onClick={() => onClick('value value')} />
-        <Square value='8' onClick={() => onClick('value value')} />
-        <Square value='9' onClick={() => onClick('value value')} />
+        {squares.map((square, i) => (
+            <Square key={i} value={square} onClick={() => onClick()} />
+        ))}
     </div>
 )
 
