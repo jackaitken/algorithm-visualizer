@@ -17,13 +17,13 @@ const Game = () => {
             setSecondClick(true);
             copyOfBoard[i] = '#'
             setBoard(copyOfBoard)
-            console.log(copyOfBoard);
+            console.log(Square[i]);
 
         } else {
             setFirstClick(true);
             copyOfBoard[i] = '#'
             setBoard(copyOfBoard)
-            console.log(copyOfBoard);
+            console.log(Square[i]);
         }
     }
 
@@ -34,11 +34,12 @@ const Game = () => {
     return (
         <>
             <div className={'title'}>Pathfinding Visualizer</div>
-                <p className={'instructions'}>
-                First click on a starting square and then a click a
-                square to end on, then click "Begin" to find a path between 
-                the two.
-                </p>
+                <ol className={'instructions'}>
+                    <li>Click on a starting square and then a click a
+                    square to end on</li>
+                    <li>Choose an algorithm</li>
+                    <li>Click "Begin to find a path between the two</li>
+                </ol>
             <Board squares={board} onClick={handleClick} />
         </>
     )
