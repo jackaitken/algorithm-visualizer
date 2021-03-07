@@ -7,36 +7,34 @@ import './Game.css'
 const Game = () => {
 
     const [board, setBoard] = useState(Array(2500).fill(null));
-    const [firstClick, setFirstClick] = useState();
-    const [secondClick, setSecondClick] = useState();
+    const [firstClick, setFirstClick] = useState(false);
+    const [secondClick, setSecondClick] = useState(false);
 
     useEffect(() => {
+        if (secondClick) {
+            let clickedSquare = document.getElementById('second-click');
+            clickedSquare.style.backgroundColor = 'black';
+            return;
+        }
+
         if (firstClick) {
-            let clickedSquare = document.getElementById('first-click')
-            console.log(clickedSquare);
+            let clickedSquare = document.getElementById('first-click');
             clickedSquare.style.backgroundColor = 'black';
+            return;
         }
-
-        if (secondClick)  {
-            let clickedSquare = document.getElementById('second-click')
-            console.log(clickedSquare);
-            clickedSquare.style.backgroundColor = 'black';
-        }
-        
     }, [firstClick, secondClick]);
-
 
     const handleClick = (i) => {
         const copyOfBoard = [...board];
 
         if (firstClick) {
             document.getElementsByTagName('button')[i].id = 'second-click';
-            setSecondClick(i);
+            setSecondClick(true);
             setBoard(copyOfBoard);
 
         } else {
             document.getElementsByTagName('button')[i].id = 'first-click';
-            setFirstClick(i);
+            setFirstClick(true);
             setBoard(copyOfBoard);
         }
     }
