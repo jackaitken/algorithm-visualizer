@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { calculateWinner } from '../../helpers';
+import React, { useState, useEffect } from 'react';
+// import { calculateWinner } from '../../helpers';
 import Board from '../Board/Board';
 import Square from '../Square/Square';
 import './Game.css'
@@ -10,25 +10,27 @@ const Game = () => {
     const [firstClick, setFirstClick] = useState();
     const [secondClick, setSecondClick] = useState();
 
+    useEffect(() => {
+        if (firstClick || secondClick) {
+            let clickedSquare = document.getElementById('click')
+            clickedSquare.style.backgroundColor = 'black';
+        }
+    }, [firstClick, secondClick]);
+
+
     const handleClick = (i) => {
-        const copyOfBoard = [...board]
+        const copyOfBoard = [...board];
 
         if (firstClick) {
-            setSecondClick(true);
-            copyOfBoard[i] = '#'
-            setBoard(copyOfBoard)
-            console.log(Square[i]);
+            document.getElementsByTagName('button')[i].id = 'click';
+            setSecondClick(i);
+            setBoard(copyOfBoard);
 
         } else {
-            setFirstClick(true);
-            copyOfBoard[i] = '#'
-            setBoard(copyOfBoard)
-            console.log(Square[i]);
+            document.getElementsByTagName('button')[i].id = 'click';
+            setFirstClick(i);
+            setBoard(copyOfBoard);
         }
-    }
-
-    const renderClick = (i) => {
-
     }
 
     return (
@@ -38,7 +40,7 @@ const Game = () => {
                     <li>Click on a starting square and then a click a
                     square to end on</li>
                     <li>Choose an algorithm</li>
-                    <li>Click "Begin to find a path between the two</li>
+                    <li>Click "Begin" to find a path between the two</li>
                 </ol>
             <Board squares={board} onClick={handleClick} />
         </>
