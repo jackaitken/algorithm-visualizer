@@ -11,10 +11,18 @@ const Game = () => {
     const [secondClick, setSecondClick] = useState();
 
     useEffect(() => {
-        if (firstClick || secondClick) {
-            let clickedSquare = document.getElementById('click')
+        if (firstClick) {
+            let clickedSquare = document.getElementById('first-click')
+            console.log(clickedSquare);
             clickedSquare.style.backgroundColor = 'black';
         }
+
+        if (secondClick)  {
+            let clickedSquare = document.getElementById('second-click')
+            console.log(clickedSquare);
+            clickedSquare.style.backgroundColor = 'black';
+        }
+        
     }, [firstClick, secondClick]);
 
 
@@ -22,12 +30,12 @@ const Game = () => {
         const copyOfBoard = [...board];
 
         if (firstClick) {
-            document.getElementsByTagName('button')[i].id = 'click';
+            document.getElementsByTagName('button')[i].id = 'second-click';
             setSecondClick(i);
             setBoard(copyOfBoard);
 
         } else {
-            document.getElementsByTagName('button')[i].id = 'click';
+            document.getElementsByTagName('button')[i].id = 'first-click';
             setFirstClick(i);
             setBoard(copyOfBoard);
         }
