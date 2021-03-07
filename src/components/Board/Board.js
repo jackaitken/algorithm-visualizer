@@ -3,7 +3,7 @@ import Square from '../Square/Square'
 
 const style = {
     borderRadius: '2px',
-    width: '1100px',
+    width: '1025px',
     height: '800px',
     margin: '0 auto',
     paddingTop: '25px',
