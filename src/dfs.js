@@ -28,7 +28,7 @@ class StackFrontier {
     }
 
     pop(node) {
-        if (this.frontier.length == 0){
+        if (this.frontier.length === 0){
             throw "Frontier is empty" 
         } else {
             return this.frontier.pop();
@@ -40,7 +40,26 @@ class StackFrontier {
     }
 
     isEmpty() {
-        return this.frontier.length == 0;
+        return this.frontier.length === 0;
     }
 }
 
+export const findNeighbors = (row, col) => {
+    const possibleSquares = {
+        'up': [row - 1, col],
+        'down': [row + 1, col],
+        'left': [row, col - 1],
+        'right': [row, col + 1]
+    };
+    const results = [];
+    for (let i of Object.entries(possibleSquares)) {
+        if (i[1][0] === -1 || i[1][1] === -1) {
+            continue;
+        } else if (i[1][0] === 50 || i[1][1] === 50) {
+            continue;
+        } else {
+            results.push(i[1]);
+        }
+    };
+    return results;
+}

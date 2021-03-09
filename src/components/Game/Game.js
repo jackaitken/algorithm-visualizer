@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { calculateWinner } from '../../helpers';
+import { findNeighbors } from '../../dfs';
 import Board from '../Board/Board';
 import Square from '../Square/Square';
 import './Game.css'
@@ -31,14 +31,15 @@ const Game = () => {
             document.getElementsByTagName('button')[i].id = 'second-click';
             setSecondClick(true);
             setBoard(copyOfBoard);
-            console.log(getRowCol(i));
 
         } else {
             document.getElementsByTagName('button')[i].id = 'first-click';
             setFirstClick(true);
             setBoard(copyOfBoard);
-            console.log(getRowCol(i));
+
         }
+        const rowCol = getRowCol(i);
+        console.log(findNeighbors(rowCol[0], rowCol[1]));
     }
 
     const getRowCol = (i) => {
@@ -52,7 +53,7 @@ const Game = () => {
             while (counter + 50 <= i) {
                 counter += 50
             }
-            if (counter == i) {
+            if (counter === i) {
                 const col = 0;
                 return [row, col];
             } else {
