@@ -10,6 +10,8 @@ DFS pseudocode:
 
 */
 
+import { act } from "react-dom/test-utils";
+
 class Node {
 
     constructor(state, parent, action) {
@@ -53,13 +55,15 @@ const solve = (start, end) => {
 
     frontier.add(firstNode);
 
-    const explored = new Set()
+    const explored = new Set();
+    explored.add([0, 1], [1, 0], [2, 1], [1, 2]);
 
-    while (!frontier.isEmpty) {
+    while (!frontier.isEmpty()) {
         let node = frontier.remove()
 
         // If current node is goal state
-        if (frontier.state === end) {
+        if (frontier.state === endNode) {
+            console.log('Goal State')
             const actions = [];
             const cells = [];
             while (node.parent != null) {
@@ -71,16 +75,19 @@ const solve = (start, end) => {
             return [actions, cells];
             };
         } 
-        // mark current node as explored
+        // Mark current node as explored
         explored.add(node);
         const neighbors = findNeighbors(node.state[0], node.state[1]);
 
-        for (const [action, state] of Object.entries()) {
-            if (!(state in explored || state in frontier)) {
+        // Add neighbors to frontier
+        for (const [action, state] of Object.entries(neighbors)) {
+            return explored.size;
+            if (!(state in explored)) {
                 let child = new Node(state, node, action);
                 frontier.add(child);
-            }
-        }
+            };
+        };
+        return frontier;
     };
     return;
 };
@@ -92,6 +99,7 @@ export const findNeighbors = (row, col) => {
         'left': [row, col - 1],
         'right': [row, col + 1]
     };
+
     const results = {};
     for (let i of Object.entries(possibleSquares)) {
         if (i[1][0] === -1 || i[1][1] === -1) {
@@ -104,3 +112,6 @@ export const findNeighbors = (row, col) => {
     };
     return results;
 }
+
+const test = solve([1, 1], [5, 5]);
+console.log(test);
