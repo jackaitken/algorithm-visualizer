@@ -19,20 +19,16 @@ const Game = () => {
             let endRowCol = getRowCol(secondClick);
             const test = solve(startRowCol, endRowCol);
             console.log(test);
-            return;
-        }
-
-        if (firstClick) {
+        } else if (firstClick || firstClick === 0) {
             let clickedSquare = document.getElementById('first-click');
             clickedSquare.style.backgroundColor = 'black';
-            return;
         }
     }, [firstClick, secondClick]);
 
     const handleClick = (i) => {
         const copyOfBoard = [...board];
 
-        if (firstClick) {
+        if (firstClick || firstClick == 0) {
             document.getElementsByTagName('button')[i].id = 'second-click';
             setSecondClick(i);
             setBoard(copyOfBoard);
