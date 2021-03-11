@@ -36,12 +36,27 @@ class StackFrontier {
     }
 }
 
+class QueueFrontier extends StackFrontier {
+    constructor () {
+        super()
+    }
+
+    remove(node) {
+        if (this.frontier.length === 0) {
+            throw "Frontier is empty"
+        } else {
+            return this.frontier.shift();
+        }
+    }
+}
+
 const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
     const frontier = new StackFrontier();
 
     frontier.add(firstNode);
+    return;
 
     let node;
     const explored = {}
@@ -99,5 +114,5 @@ export const findNeighbors = (row, col) => {
     return results;
 }
 
-const test = solve([1, 1], [5, 5]);
+const test = solve([1, 1], [1, 2]);
 console.log(test);

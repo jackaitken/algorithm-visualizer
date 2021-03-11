@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { findNeighbors } from '../../dfs';
+import { findNeighbors } from '../../StackAndQueue';
 import Board from '../Board/Board';
 import Square from '../Square/Square';
 import './Game.css'
