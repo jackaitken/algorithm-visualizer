@@ -50,7 +50,7 @@ class QueueFrontier extends StackFrontier {
     }
 }
 
-const solve = (start, end) => {
+export const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
     const frontier = new StackFrontier();
@@ -112,6 +112,3 @@ export const findNeighbors = (row, col) => {
     };
     return results;
 }
-
-const test = solve([1, 1], [1, 2]);
-console.log(test);

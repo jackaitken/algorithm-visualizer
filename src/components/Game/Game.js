@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { findNeighbors } from '../../StackAndQueue';
+import { findNeighbors, solve } from '../../StackAndQueue';
 import Board from '../Board/Board';
 import Square from '../Square/Square';
 import './Game.css'
@@ -7,13 +7,18 @@ import './Game.css'
 const Game = () => {
 
     const [board, setBoard] = useState(Array(2500).fill(null));
-    const [firstClick, setFirstClick] = useState(false);
-    const [secondClick, setSecondClick] = useState(false);
+    const [firstClick, setFirstClick] = useState();
+    const [secondClick, setSecondClick] = useState();
 
     useEffect(() => {
         if (secondClick) {
             let clickedSquare = document.getElementById('second-click');
             clickedSquare.style.backgroundColor = 'black';
+
+            let startRowCol = getRowCol(firstClick);
+            let endRowCol = getRowCol(secondClick);
+            const test = solve(startRowCol, endRowCol);
+            console.log(test);
             return;
         }
 
@@ -29,14 +34,15 @@ const Game = () => {
 
         if (firstClick) {
             document.getElementsByTagName('button')[i].id = 'second-click';
-            setSecondClick(true);
+            setSecondClick(i);
             setBoard(copyOfBoard);
 
         } else {
             document.getElementsByTagName('button')[i].id = 'first-click';
-            setFirstClick(true);
+            setFirstClick(i);
             setBoard(copyOfBoard);
         }
+
     }
 
     const getRowCol = (i) => {
