@@ -57,7 +57,7 @@ const solve = (start, end) => {
             while (currentNode.parent != null) {
                 actions.push(currentNode.action);
                 cells.push(currentNode.state);
-                let currentNode = currentNode.parent;
+                currentNode = currentNode.parent;
             };
             actions.reverse(); 
             cells.reverse();
@@ -99,5 +99,5 @@ export const findNeighbors = (row, col) => {
     return results;
 }
 
-const test = solve([1, 1], [1, 2]);
+const test = solve([1, 1], [5, 5]);
 console.log(test);
