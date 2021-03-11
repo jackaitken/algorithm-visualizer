@@ -43,24 +43,25 @@ const solve = (start, end) => {
 
     frontier.add(firstNode);
 
+    let node;
     const explored = {}
 
     while (!frontier.isEmpty()) {
-        let node = frontier.remove()
+        node = frontier.remove();
 
         // If current node is goal state
-        if (frontier.state === endNode) {
-            console.log('Goal State')
-            const actions = [];
-            const cells = [];
-            while (node.parent != null) {
-                actions.push(node.action);
-                cells.push(node.state);
-                let node = node.parent;
+        if (node.state.toString() === endNode.toString()) {
+            let actions = [];
+            let cells = [];
+            let currentNode = node;
+            while (currentNode.parent != null) {
+                actions.push(currentNode.action);
+                cells.push(currentNode.state);
+                let currentNode = currentNode.parent;
+            };
             actions.reverse(); 
             cells.reverse();
             return [actions, cells];
-            };
         } 
         // Mark current node as explored
         explored[node.state.toString()] = true;
@@ -75,7 +76,6 @@ const solve = (start, end) => {
             };
         };
     };
-    return;
 };
 
 export const findNeighbors = (row, col) => {
@@ -99,5 +99,5 @@ export const findNeighbors = (row, col) => {
     return results;
 }
 
-const test = solve([1, 1], [5, 5]);
+const test = solve([1, 1], [1, 2]);
 console.log(test);
