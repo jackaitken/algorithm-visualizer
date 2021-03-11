@@ -56,7 +56,6 @@ const solve = (start, end) => {
     const frontier = new StackFrontier();
 
     frontier.add(firstNode);
-    return;
 
     let node;
     const explored = {}
