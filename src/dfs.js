@@ -1,15 +1,3 @@
-/* 
-DFS pseudocode:
-
-1. If the frontier is empty then return no solution. Exit.
-2. Remove a square from the frontier.
-3. If the square is our endSquare we'll return the solution. Exit
-4. Add the square to the explored set
-5. Expand the square and add the resulting squares to the frontier only if they're not already
-    there and if they haven't already been explored.
-
-*/
-
 import { act } from "react-dom/test-utils";
 
 class Node {
@@ -55,8 +43,7 @@ const solve = (start, end) => {
 
     frontier.add(firstNode);
 
-    const explored = new Set();
-    explored.add([0, 1], [1, 0], [2, 1], [1, 2]);
+    const explored = {}
 
     while (!frontier.isEmpty()) {
         let node = frontier.remove()
@@ -76,18 +63,17 @@ const solve = (start, end) => {
             };
         } 
         // Mark current node as explored
-        explored.add(node);
+        explored[node.state.toString()] = true;
+
         const neighbors = findNeighbors(node.state[0], node.state[1]);
 
         // Add neighbors to frontier
         for (const [action, state] of Object.entries(neighbors)) {
-            return explored.size;
             if (!(state in explored)) {
                 let child = new Node(state, node, action);
                 frontier.add(child);
             };
         };
-        return frontier;
     };
     return;
 };

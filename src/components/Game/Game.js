@@ -36,10 +36,7 @@ const Game = () => {
             document.getElementsByTagName('button')[i].id = 'first-click';
             setFirstClick(true);
             setBoard(copyOfBoard);
-
         }
-        const rowCol = getRowCol(i);
-        console.log(findNeighbors(rowCol[0], rowCol[1]));
     }
 
     const getRowCol = (i) => {
