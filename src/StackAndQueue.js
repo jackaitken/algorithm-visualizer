@@ -77,7 +77,7 @@ export const solve = (start, end) => {
             };
             actions.reverse(); 
             cells.reverse();
-            cells.pop()
+            cells.pop() // Remove last cell which is the end node
             return cells;
         } 
         // Mark current node as explored
