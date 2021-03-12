@@ -34,6 +34,10 @@ class StackFrontier {
     isEmpty() {
         return this.frontier.length === 0;
     }
+
+    containsNode(node) {
+        return node in this.frontier;
+    }
 }
 
 class QueueFrontier extends StackFrontier {
@@ -58,11 +62,15 @@ export const solve = (start, end) => {
     frontier.add(firstNode);
 
     let node;
-    const explored = {}
+    const explored = {
+        '0,0': true,
+        '0,1': true,
+        '0,2': true
+    }
 
     while (!frontier.isEmpty()) {
         node = frontier.remove();
-        
+
         // If current node is goal state
         if (node.state.toString() === endNode.toString()) {
             let actions = [];
@@ -84,9 +92,12 @@ export const solve = (start, end) => {
 
         // Add neighbors to frontier
         for (const [action, state] of Object.entries(neighbors)) {
-            if (!(state in explored)) {
+            if (!(state.toString() in explored)) {
                 let child = new Node(state, node, action);
-                frontier.add(child);
+                let inFrontier = frontier.containsNode(child);
+                if (!inFrontier) {
+                    frontier.add(child);
+                }
             };
         };
     };
