@@ -53,7 +53,7 @@ class QueueFrontier extends StackFrontier {
 export const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
-    const frontier = new StackFrontier();
+    const frontier = new QueueFrontier();
 
     frontier.add(firstNode);
 
@@ -62,7 +62,7 @@ export const solve = (start, end) => {
 
     while (!frontier.isEmpty()) {
         node = frontier.remove();
-
+        
         // If current node is goal state
         if (node.state.toString() === endNode.toString()) {
             let actions = [];
