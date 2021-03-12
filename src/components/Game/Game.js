@@ -9,6 +9,7 @@ const Game = () => {
     const [board, setBoard] = useState(Array(2500).fill(null));
     const [firstClick, setFirstClick] = useState();
     const [secondClick, setSecondClick] = useState();
+    const [solvedRoute, setSolvedRoute] = useState();
 
     useEffect(() => {
         if (secondClick) {
@@ -18,27 +19,44 @@ const Game = () => {
             let startRowCol = getRowCol(firstClick);
             let endRowCol = getRowCol(secondClick);
             const test = solve(startRowCol, endRowCol);
-            console.log(test);
+            return [printRoute(test), board];
+
         } else if (firstClick || firstClick === 0) {
             let clickedSquare = document.getElementById('first-click');
             clickedSquare.style.backgroundColor = 'black';
         }
     }, [firstClick, secondClick]);
 
+    useEffect(() => {
+        const copyOfBoard = [...board];
+        if (solvedRoute) {
+            const solvedCells = [];
+            solvedRoute.forEach(cell => {
+                solvedCells.push(document.getElementsByTagName('button').[cell])
+                copyOfBoard[cell] = cell;
+            });
+            solvedCells.forEach(cell => {
+                cell.style.backgroundColor = 'yellow';
+            })
+            setBoard(copyOfBoard);
+        }
+    }, [solvedRoute]);
+
     const handleClick = (i) => {
         const copyOfBoard = [...board];
 
-        if (firstClick || firstClick == 0) {
+        if (firstClick || firstClick === 0) {
             document.getElementsByTagName('button')[i].id = 'second-click';
             setSecondClick(i);
+            copyOfBoard[i] = i;
             setBoard(copyOfBoard);
 
         } else {
             document.getElementsByTagName('button')[i].id = 'first-click';
             setFirstClick(i);
+            copyOfBoard[i] = i;
             setBoard(copyOfBoard);
         }
-
     }
 
     const getRowCol = (i) => {
@@ -61,6 +79,19 @@ const Game = () => {
             }
         }
     } 
+
+    const getCellFromRowCol = (row, col) => {
+        return (row * 50) + col;
+    }
+
+    const printRoute = (array) => {
+        let cellArray = []
+        for (let i of array) {
+            let cell = getCellFromRowCol(i[0], i[1])
+            cellArray.push(cell);
+        }
+        setSolvedRoute(cellArray);
+    }
 
     return (
         <>

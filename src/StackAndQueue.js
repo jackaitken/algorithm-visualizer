@@ -77,8 +77,8 @@ export const solve = (start, end) => {
             };
             actions.reverse(); 
             cells.reverse();
-            return [actions, cells, explored, frontier, frontierStates];
-            
+            cells.pop()
+            return cells;
         } 
         // Mark current node as explored
         explored[node.state.toString()] = true;
