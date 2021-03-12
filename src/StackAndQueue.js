@@ -58,13 +58,15 @@ export const solve = (start, end) => {
     const explored = {};
     const frontierStates = {};
 
+    // Add our start node into the frontier and mark it as seen
     frontier.add(firstNode);
     frontierStates[firstNode.state.toString()] = true;
 
+    // Enter main function loop
     while (!frontier.isEmpty()) {
         node = frontier.remove();
 
-        // If current node is goal state
+        // Check if current node is the goal state
         if (node.state.toString() === endNode.toString()) {
             let actions = [];
             let cells = [];
@@ -83,14 +85,12 @@ export const solve = (start, end) => {
 
         const neighbors = findNeighbors(node.state[0], node.state[1]);
 
-        // Add neighbors to frontier
+        // Add neighbor if it hasn't been explored and isn't in the frontier
         for (const [action, state] of Object.entries(neighbors)) {
-            if (!(state.toString() in explored )) {
-                if (!(state.toString() in frontierStates)){
-                    let child = new Node(state, node, action);
-                    frontierStates[child.state.toString()] = true;
-                    frontier.add(child);
-                };
+            if (!(state.toString() in explored || state.toString() in frontierStates)) {
+                let child = new Node(state, node, action);
+                frontierStates[child.state.toString()] = true;
+                frontier.add(child);
             };
         };
     };
