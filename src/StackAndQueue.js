@@ -34,10 +34,6 @@ class StackFrontier {
     isEmpty() {
         return this.frontier.length === 0;
     }
-
-    containsNode(node) {
-        return node in this.frontier;
-    }
 }
 
 class QueueFrontier extends StackFrontier {
@@ -58,15 +54,15 @@ export const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
     const frontier = new QueueFrontier();
+    let node;
+    const explored = {};
+    const frontierStates = {
+        '1,3': true,
+        '0,3': true
+    };
 
     frontier.add(firstNode);
-
-    let node;
-    const explored = {
-        '0,0': true,
-        '0,1': true,
-        '0,2': true
-    }
+    frontierStates[firstNode.state.toString()] = true;
 
     while (!frontier.isEmpty()) {
         node = frontier.remove();
@@ -75,15 +71,15 @@ export const solve = (start, end) => {
         if (node.state.toString() === endNode.toString()) {
             let actions = [];
             let cells = [];
-            let currentNode = node;
-            while (currentNode.parent != null) {
-                actions.push(currentNode.action);
-                cells.push(currentNode.state);
-                currentNode = currentNode.parent;
+            while (node.parent != null) {
+                actions.push(node.action);
+                cells.push(node.state);
+                node = node.parent;
             };
             actions.reverse(); 
             cells.reverse();
-            return [actions, cells];
+            return [actions, cells, explored, frontier, frontierStates];
+            
         } 
         // Mark current node as explored
         explored[node.state.toString()] = true;
@@ -92,12 +88,12 @@ export const solve = (start, end) => {
 
         // Add neighbors to frontier
         for (const [action, state] of Object.entries(neighbors)) {
-            if (!(state.toString() in explored)) {
-                let child = new Node(state, node, action);
-                let inFrontier = frontier.containsNode(child);
-                if (!inFrontier) {
+            if (!(state.toString() in explored )) {
+                if (!(state.toString() in frontierStates)){
+                    let child = new Node(state, node, action);
+                    frontierStates[child.state.toString()] = true;
                     frontier.add(child);
-                }
+                };
             };
         };
     };
