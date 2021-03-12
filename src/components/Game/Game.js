@@ -18,8 +18,8 @@ const Game = () => {
 
             let startRowCol = getRowCol(firstClick);
             let endRowCol = getRowCol(secondClick);
-            const test = solve(startRowCol, endRowCol);
-            return [printRoute(test), board];
+            const solution = solve(startRowCol, endRowCol);
+            return printRoute(solution);
 
         } else if (firstClick || firstClick === 0) {
             let clickedSquare = document.getElementById('first-click');
@@ -32,7 +32,7 @@ const Game = () => {
         if (solvedRoute) {
             const solvedCells = [];
             solvedRoute.forEach(cell => {
-                solvedCells.push(document.getElementsByTagName('button').[cell])
+                solvedCells.push(document.getElementsByTagName('button')[cell])
                 copyOfBoard[cell] = cell;
             });
             solvedCells.forEach(cell => {
