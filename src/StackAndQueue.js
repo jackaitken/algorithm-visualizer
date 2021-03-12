@@ -56,10 +56,7 @@ export const solve = (start, end) => {
     const frontier = new QueueFrontier();
     let node;
     const explored = {};
-    const frontierStates = {
-        '1,3': true,
-        '0,3': true
-    };
+    const frontierStates = {};
 
     frontier.add(firstNode);
     frontierStates[firstNode.state.toString()] = true;
