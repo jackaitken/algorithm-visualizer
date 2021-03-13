@@ -85,9 +85,10 @@ export const solve = (start, end) => {
 
         const neighbors = findNeighbors(node.state[0], node.state[1]);
 
-        // Add neighbor if it hasn't been explored and isn't in the frontier
+        // Add neighbor if it hasn't been explored
         for (const [action, state] of Object.entries(neighbors)) {
             if (!(state.toString() in explored)) {
+                // If using a Queue, check that it's not in frontier
                 if (frontier.constructor.name == 'QueueFrontier') {
                     if (state.toString() in frontierStates) {
                         continue
