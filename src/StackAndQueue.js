@@ -53,7 +53,7 @@ class QueueFrontier extends StackFrontier {
 export const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
-    const frontier = new QueueFrontier();
+    const frontier = new StackFrontier();
     let node;
     const explored = {};
     const frontierStates = {};
@@ -87,7 +87,12 @@ export const solve = (start, end) => {
 
         // Add neighbor if it hasn't been explored and isn't in the frontier
         for (const [action, state] of Object.entries(neighbors)) {
-            if (!(state.toString() in explored || state.toString() in frontierStates)) {
+            if (!(state.toString() in explored)) {
+                if (frontier.constructor.name == 'QueueFrontier') {
+                    if (state.toString() in frontierStates) {
+                        continue
+                    }
+                }
                 let child = new Node(state, node, action);
                 frontierStates[child.state.toString()] = true;
                 frontier.add(child);
