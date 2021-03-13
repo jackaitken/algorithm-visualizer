@@ -12,7 +12,7 @@ const Game = () => {
     const [solvedRoute, setSolvedRoute] = useState();
 
     useEffect(() => {
-        if (secondClick) {
+        if (secondClick || secondClick === 0) {
             let clickedSquare = document.getElementById('second-click');
             clickedSquare.style.backgroundColor = 'black';
 
@@ -82,6 +82,10 @@ const Game = () => {
 
     const getCellFromRowCol = (row, col) => {
         return (row * 50) + col;
+    }
+
+    const colorSquare = (square) => {
+        return square.style.backgroundColor = 'yellow';
     }
 
     const printRoute = (array) => {
