@@ -31,17 +31,20 @@ const Game = () => {
         const copyOfBoard = [...board];
         if (solvedRoute) {
             const solvedCells = [];
-            solvedRoute.forEach(cell => {
-                solvedCells.push(document.getElementsByTagName('button')[cell])
-                copyOfBoard[cell] = cell;
-            });
-            solvedCells.forEach(cell => {
-                cell.style.backgroundColor = 'yellow';
-            })
-            setBoard(copyOfBoard);
+            if (solvedRoute != 'yellow') {
+                solvedRoute.forEach(cell => {
+                    solvedCells.push(document.getElementsByTagName('button')[cell]);
+                    copyOfBoard[cell] = cell;
+                });
+                solvedCells.forEach(cell => {
+                    setSolvedRoute(cell.style.backgroundColor = 'yellow');
+                })
+            } else {
+                return;
+            }
         }
     }, [solvedRoute]);
-
+    
     const handleClick = (i) => {
         const copyOfBoard = [...board];
 
@@ -82,10 +85,6 @@ const Game = () => {
 
     const getCellFromRowCol = (row, col) => {
         return (row * 50) + col;
-    }
-
-    const colorSquare = (square) => {
-        return square.style.backgroundColor = 'yellow';
     }
 
     const printRoute = (array) => {
