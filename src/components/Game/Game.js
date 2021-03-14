@@ -16,10 +16,6 @@ const Game = () => {
             let clickedSquare = document.getElementById('second-click');
             clickedSquare.style.backgroundColor = 'black';
 
-            let startRowCol = getRowCol(firstClick);
-            let endRowCol = getRowCol(secondClick);
-            const solution = solve(startRowCol, endRowCol);
-            return printRoute(solution);
 
         } else if (firstClick || firstClick === 0) {
             let clickedSquare = document.getElementById('first-click');
@@ -47,6 +43,13 @@ const Game = () => {
             }
         }
     }, [solvedRoute]);
+
+    const beginVisualization = () => {
+        let startRowCol = getRowCol(firstClick);
+        let endRowCol = getRowCol(secondClick);
+        const solution = solve(startRowCol, endRowCol);
+        return printRoute(solution);
+    }
     
     const handleClick = (i) => {
         const copyOfBoard = [...board];
@@ -102,12 +105,16 @@ const Game = () => {
     return (
         <>
             <div className={'title'}>Pathfinding Visualizer</div>
-                <ol className={'instructions'}>
-                    <li>Click on a starting square and then a click a
-                    square to end on</li>
-                    <li>Choose an algorithm</li>
-                    <li>Click "Begin" to find a path between the two</li>
-                </ol>
+                <div className={'instructions'}>
+                    <ol className={'instructions'}>
+                        <li>Click on a starting square and then a click a
+                        square to end on</li>
+                        <li>Choose an algorithm</li>
+                        <li>Click "Begin" to find a path between the two</li>
+                    </ol>
+                    <button onClick={beginVisualization}>Begin</button>
+                </div>
+                
             <Board squares={board} onClick={handleClick} />
         </>
     )
