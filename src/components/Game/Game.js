@@ -36,8 +36,11 @@ const Game = () => {
                     solvedCells.push(document.getElementsByTagName('button')[cell]);
                     copyOfBoard[cell] = cell;
                 });
-                solvedCells.forEach(cell => {
-                    setSolvedRoute(cell.style.backgroundColor = 'yellow');
+                
+                solvedCells.forEach(function(cell, index) {
+                    setTimeout(function() {
+                        setSolvedRoute(cell.style.backgroundColor = 'yellow');
+                    }, 10 * (index + 1));
                 })
             } else {
                 return;
