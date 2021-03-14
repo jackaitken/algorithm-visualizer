@@ -10,11 +10,13 @@ const Game = () => {
     const [firstClick, setFirstClick] = useState();
     const [secondClick, setSecondClick] = useState();
     const [solvedRoute, setSolvedRoute] = useState();
+    const [buttonState, setButtonState] = useState(true);
 
     useEffect(() => {
         if (secondClick || secondClick === 0) {
             let clickedSquare = document.getElementById('second-click');
             clickedSquare.style.backgroundColor = 'black';
+            setButtonState(false);
 
 
         } else if (firstClick || firstClick === 0) {
@@ -36,7 +38,7 @@ const Game = () => {
                 solvedCells.forEach(function(cell, index) {
                     setTimeout(function() {
                         setSolvedRoute(cell.style.backgroundColor = 'orange');
-                    }, 5 * (index + 1));
+                    }, 20 * (index + 1));
                 })
             } else {
                 return;
@@ -112,7 +114,10 @@ const Game = () => {
                         <li>Choose an algorithm</li>
                         <li>Click "Begin" to find a path between the two</li>
                     </ol>
-                    <button onClick={beginVisualization}>Begin</button>
+                    <button disabled={buttonState} 
+                    onClick={beginVisualization}
+                    id='beginButton'>Begin
+                    </button>
                 </div>
                 
             <Board squares={board} onClick={handleClick} />
