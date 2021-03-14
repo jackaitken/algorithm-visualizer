@@ -31,7 +31,7 @@ const Game = () => {
         const copyOfBoard = [...board];
         if (solvedRoute) {
             const solvedCells = [];
-            if (solvedRoute != 'yellow') {
+            if (solvedRoute != 'orange') {
                 solvedRoute.forEach(cell => {
                     solvedCells.push(document.getElementsByTagName('button')[cell]);
                     copyOfBoard[cell] = cell;
@@ -39,8 +39,8 @@ const Game = () => {
                 
                 solvedCells.forEach(function(cell, index) {
                     setTimeout(function() {
-                        setSolvedRoute(cell.style.backgroundColor = 'yellow');
-                    }, 10 * (index + 1));
+                        setSolvedRoute(cell.style.backgroundColor = 'orange');
+                    }, 5 * (index + 1));
                 })
             } else {
                 return;
