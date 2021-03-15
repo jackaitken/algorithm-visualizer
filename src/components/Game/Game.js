@@ -9,7 +9,7 @@ const Game = () => {
     const [board, setBoard] = useState(Array(2500).fill(null));
     const [firstClick, setFirstClick] = useState(null);
     const [secondClick, setSecondClick] = useState(null);
-    const [solvedRoute, setSolvedRoute] = useState(null);
+    const [solvedRoute, setSolvedRoute] = useState(0);
     const [beginButtonVisibility, setBeginButtonVisibility] = useState('none');
     const [clearBoardVisibility, setClearBoardVisibility] = useState('none');
     const [handleClickCounter, setHandleClickCounter] = useState(0);
@@ -36,6 +36,7 @@ const Game = () => {
                 solvedRoute.forEach(cell => {
                     solvedCells.push(document.getElementsByTagName('button')[cell]);
                     copyOfBoard[cell] = cell;
+                    setBoard(copyOfBoard);
                 });
                 
                 solvedCells.forEach(function(cell, index) {
@@ -43,9 +44,17 @@ const Game = () => {
                         setSolvedRoute(cell.style.backgroundColor = 'orange');
                     }, 20 * (index + 1));
                 })
-            } else {
-                console.log(solvedCells);
             }
+        } else if (solvedRoute == null) {
+            board.forEach(cell => {
+                if (cell != null) {
+                    document.getElementsByTagName('button')[cell].style.backgroundColor = 'rgb(188, 187, 186)';
+                    document.getElementsByTagName('button')[cell].id = 'square';
+                }
+            })
+            setBoard(Array(2500).fill(null));
+            setHandleClickCounter(0);
+            setClearBoardVisibility('none');
         }
     }, [solvedRoute]);
 
@@ -57,9 +66,15 @@ const Game = () => {
         const solution = solve(startRowCol, endRowCol);
         return printRoute(solution);
     }
+
+    const clearBoard  = () => {
+        setFirstClick(null);
+        setSecondClick(null);
+        setSolvedRoute(null);
+    }
     
     const handleClick = (i) => {
-        // Leave if clicked more than twice
+        // Exit if clicked more than twice
         if (handleClickCounter === 2){
             return;
         } 
@@ -130,7 +145,7 @@ const Game = () => {
                         style={{display: beginButtonVisibility}}>
                         Begin
                     </a>
-                    <a href='#'
+                    <a href='#' onClick={clearBoard}
                         style={{display: clearBoardVisibility}}>
                         Clear Board
                     </a>
