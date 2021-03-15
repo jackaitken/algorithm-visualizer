@@ -7,28 +7,31 @@ import './Game.css'
 const Game = () => {
 
     const [board, setBoard] = useState(Array(2500).fill(null));
-    const [firstClick, setFirstClick] = useState();
-    const [secondClick, setSecondClick] = useState();
-    const [solvedRoute, setSolvedRoute] = useState();
-    const [buttonState, setButtonState] = useState(true);
+    const [firstClick, setFirstClick] = useState(null);
+    const [secondClick, setSecondClick] = useState(null);
+    const [solvedRoute, setSolvedRoute] = useState(null);
+    const [beginButtonVisibility, setBeginButtonVisibility] = useState('none');
+    const [clearBoardVisibility, setClearBoardVisibility] = useState('none');
+    const [handleClickCounter, setHandleClickCounter] = useState(0);
 
     useEffect(() => {
+        let clickedSquare;
+        
         if (secondClick || secondClick === 0) {
-            let clickedSquare = document.getElementById('second-click');
+            clickedSquare = document.getElementById('second-click');
             clickedSquare.style.backgroundColor = 'black';
-            setButtonState(false);
-
 
         } else if (firstClick || firstClick === 0) {
-            let clickedSquare = document.getElementById('first-click');
+            clickedSquare = document.getElementById('first-click');
             clickedSquare.style.backgroundColor = 'black';
         }
+        
     }, [firstClick, secondClick]);
 
     useEffect(() => {
         const copyOfBoard = [...board];
+        const solvedCells = [];
         if (solvedRoute) {
-            const solvedCells = [];
             if (solvedRoute != 'orange') {
                 solvedRoute.forEach(cell => {
                     solvedCells.push(document.getElementsByTagName('button')[cell]);
@@ -41,12 +44,14 @@ const Game = () => {
                     }, 20 * (index + 1));
                 })
             } else {
-                return;
+                console.log(solvedCells);
             }
         }
     }, [solvedRoute]);
 
     const beginVisualization = () => {
+        setBeginButtonVisibility('none');
+        setClearBoardVisibility('block');
         let startRowCol = getRowCol(firstClick);
         let endRowCol = getRowCol(secondClick);
         const solution = solve(startRowCol, endRowCol);
@@ -54,6 +59,11 @@ const Game = () => {
     }
     
     const handleClick = (i) => {
+        // Leave if clicked more than twice
+        if (handleClickCounter === 2){
+            return;
+        } 
+        setHandleClickCounter(handleClickCounter + 1);
         const copyOfBoard = [...board];
 
         if (firstClick || firstClick === 0) {
@@ -61,6 +71,7 @@ const Game = () => {
             setSecondClick(i);
             copyOfBoard[i] = i;
             setBoard(copyOfBoard);
+            setBeginButtonVisibility('block');
 
         } else {
             document.getElementsByTagName('button')[i].id = 'first-click';
@@ -107,18 +118,24 @@ const Game = () => {
     return (
         <>
             <div className={'title'}>Pathfinding Visualizer</div>
-                <div className={'instructions'}>
-                    <ol className={'instructions'}>
-                        <li>Click on a starting square and then a click a
-                        square to end on</li>
-                        <li>Choose an algorithm</li>
-                        <li>Click "Begin" to find a path between the two</li>
-                    </ol>
-                    <button disabled={buttonState} 
-                    onClick={beginVisualization}
-                    id='beginButton'>Begin
-                    </button>
+            <div className={'instructions'}>
+                <ol className={'instructions'}>
+                    <li>Click on a starting square and then a click a
+                    square to end on</li>
+                    <li>Choose an algorithm</li>
+                    <li>Click "Begin" to find a path between the two</li>
+                </ol>
+                <div className={'beginClearButtons'}>
+                    <a href='#' onClick={beginVisualization}
+                        style={{display: beginButtonVisibility}}>
+                        Begin
+                    </a>
+                    <a href='#' onClick={clearBoard}
+                        style={{display: clearBoardVisibility}}>
+                        Clear Board
+                    </a>
                 </div>
+            </div>
                 
             <Board squares={board} onClick={handleClick} />
         </>

@@ -9,12 +9,10 @@ const style = {
     outline: 'none',
 }
 
-
 const Square = ({ value, onClick }) => (
     <button id={'square'} style={style} onClick={onClick}>
-        {value}
+    {value}
     </button>
 )
-
 
 export default Square

@@ -18,3 +18,9 @@
     font-family: monospace;
     font-size: 15px;
 }
+
+.beginClearButtons {
+    position: absolute;
+    width: 100px;
+    top: 160px
+}
