@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { findNeighbors, solve } from '../../StackAndQueue';
+import { solve } from '../../dfsandbfs';
+import { getCellFromRowCol, getRowCol } from '../../helpers';
 import Board from '../Board/Board';
-import Square from '../Square/Square';
 import './Game.css'
 
 const Game = () => {
@@ -32,7 +32,7 @@ const Game = () => {
         const copyOfBoard = [...board];
         const solvedCells = [];
         if (solvedRoute) {
-            if (solvedRoute != 'orange') {
+            if (solvedRoute !== 'orange') {
                 solvedRoute.forEach(cell => {
                     solvedCells.push(document.getElementsByTagName('button')[cell]);
                     copyOfBoard[cell] = cell;
@@ -45,6 +45,7 @@ const Game = () => {
                     }, 20 * (index + 1));
                 })
             }
+            // Reset all squares after clear board
         } else if (solvedRoute == null) {
             board.forEach(cell => {
                 if (cell != null) {
@@ -58,21 +59,6 @@ const Game = () => {
         }
     }, [solvedRoute]);
 
-    const beginVisualization = () => {
-        setBeginButtonVisibility('none');
-        setClearBoardVisibility('block');
-        let startRowCol = getRowCol(firstClick);
-        let endRowCol = getRowCol(secondClick);
-        const solution = solve(startRowCol, endRowCol);
-        return printRoute(solution);
-    }
-
-    const clearBoard  = () => {
-        setFirstClick(null);
-        setSecondClick(null);
-        setSolvedRoute(null);
-    }
-    
     const handleClick = (i) => {
         // Exit if clicked more than twice
         if (handleClickCounter === 2){
@@ -96,38 +82,31 @@ const Game = () => {
         }
     }
 
-    const getRowCol = (i) => {
-        const row = Math.floor(i / 50);
+    const beginVisualization = () => {
+        setBeginButtonVisibility('none');
 
-        if (i < 50) {
-            const col = i;
-            return [row, col];
-        } else {
-            let counter = 0;
-            while (counter + 50 <= i) {
-                counter += 50
-            }
-            if (counter === i) {
-                const col = 0;
-                return [row, col];
-            } else {
-                const col = (i - counter);
-                return [row, col];
-            }
-        }
-    } 
-
-    const getCellFromRowCol = (row, col) => {
-        return (row * 50) + col;
+        // getRowCol located in src/helpers
+        let startRowCol = getRowCol(firstClick);
+        let endRowCol = getRowCol(secondClick);
+        const solution = solve(startRowCol, endRowCol);
+        setClearBoardVisibility('block');
+        return printRoute(solution);
     }
 
     const printRoute = (array) => {
         let cellArray = []
         for (let i of array) {
-            let cell = getCellFromRowCol(i[0], i[1])
+            let cell = getCellFromRowCol(i[0], i[1]) // getCellFromRowCol located in src/helpers
             cellArray.push(cell);
         }
         setSolvedRoute(cellArray);
+    }
+
+    const clearBoard  = () => {
+        // Reset all state
+        setFirstClick(null);
+        setSecondClick(null);
+        setSolvedRoute(null);
     }
 
     return (
