@@ -130,7 +130,7 @@ const Game = () => {
                         style={{display: beginButtonVisibility}}>
                         Begin
                     </a>
-                    <a href='#' onClick={clearBoard}
+                    <a href='#'
                         style={{display: clearBoardVisibility}}>
                         Clear Board
                     </a>
