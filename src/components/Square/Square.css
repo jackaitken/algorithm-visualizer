@@ -1,0 +1,13 @@
+.squareStyle {
+    border: 1px solid rgb(99, 101, 104);
+    background-color: rgb(188, 187, 186);
+    transition: background-color .2s;
+    font-size: 1px;
+    color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    outline: none;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.596);
+}
