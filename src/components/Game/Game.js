@@ -45,6 +45,7 @@ const Game = () => {
                     }, 20 * (index + 1));
                 })
             }
+            setClearBoardVisibility('block');
             // Reset all squares after clear board
         } else if (solvedRoute == null) {
             board.forEach(cell => {
@@ -89,7 +90,6 @@ const Game = () => {
         let startRowCol = getRowCol(firstClick);
         let endRowCol = getRowCol(secondClick);
         const solution = solve(startRowCol, endRowCol);
-        setClearBoardVisibility('block');
         return printRoute(solution);
     }
 
@@ -114,8 +114,7 @@ const Game = () => {
             <div className={'title'}>Pathfinding Visualizer</div>
             <div className={'instructions'}>
                 <ol className={'instructions'}>
-                    <li>Click on a starting square and then a click a
-                    square to end on</li>
+                    <li>Choose a start node and an end node</li>
                     <li>Choose an algorithm</li>
                     <li>Click "Begin" to find a path between the two</li>
                 </ol>
