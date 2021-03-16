@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils";
-
 class Node {
 
     constructor(state, parent, action) {
@@ -89,7 +87,7 @@ export const solve = (start, end) => {
         for (const [action, state] of Object.entries(neighbors)) {
             if (!(state.toString() in explored)) {
                 // If using a Queue, check that it's not in frontier
-                if (frontier.constructor.name == 'QueueFrontier') {
+                if (frontier.constructor.name === 'QueueFrontier') {
                     if (state.toString() in frontierStates) {
                         continue
                     }

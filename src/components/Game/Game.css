@@ -9,18 +9,21 @@
     font-size: 25px;
 }
 
-.instructions {
+.flex-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
     font-family: monospace;
     font-size: 15px;
+    text-align: center;
+}
+
+.flex-child {
+    flex: 1;
 }
 
 .beginClearButtons {
     position: absolute;
     width: 100px;
-    top: 160px
+    top: 175px;
+    font-size: 15px;
 }
