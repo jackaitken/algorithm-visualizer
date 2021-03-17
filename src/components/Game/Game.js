@@ -132,10 +132,18 @@ const Game = () => {
                 </dl>
                 <dl className={'flex-child'}>
                     <dd><strong>Adjust speed</strong></dd>
-                    <dd><a href='#'>Wow, that's way too slow</a></dd>
-                    <dd><a href='#'>Okay, that's a little bit faster</a></dd>
-                    <dd><a href='#'>This is a nice speed</a></dd>
-                    <dd><a href='#'>Whoa, that's fast</a></dd>
+                    <input type={'radio'} id={'Slowest'} name={'speed'}></input>
+                        <label for='dfs'>Slowest</label>
+                    <input type={'radio'} id={'Slow'} name={'speed'}></input>
+                        <label for='dfs'>Slow</label>
+                    <br></br>
+                    <input type={'radio'} id={'Faster'} name={'speed'} checked></input>
+                        <label for='dfs'>Faster</label>
+                    <input type={'radio'} id={'Even Faster'} name={'speed'}></input>
+                        <label for='dfs'>Even Faster</label>
+                    <br></br>
+                    <input type={'radio'} id={'Actual Speed'} name={'speed'}></input>
+                        <label for='dfs'>Actual Speed</label>
                 </dl>
                 <div className={'beginClearButtons'}>
                     <a href='#' onClick={beginVisualization}
