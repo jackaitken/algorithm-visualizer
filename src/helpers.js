@@ -22,3 +22,13 @@ export const getRowCol = (i) => {
 export const getCellFromRowCol = (row, col) => {
     return (row * 50) + col;
 }
+
+export const convertExploredObject = (exploredNodes) => {
+    const sortedObject = Object.entries(exploredNodes);
+    console.log(sortedObject);
+    const exploredNodesArray = [];
+    for (const [cells, index] of sortedObject) {
+        let convertedCell = getCellFromRowCol(cells[0], cells[1])
+        exploredNodesArray.push(convertedCell);
+    }
+}
