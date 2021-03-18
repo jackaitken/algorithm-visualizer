@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { solve } from '../../dfsandbfs';
-import { getCellFromRowCol, getRowCol } from '../../helpers';
+import { getCellFromRowCol, getRowCol, convertExploredObject } 
+    from '../../helpers';
 import Board from '../Board/Board';
 import './Game.css'
 
@@ -91,8 +92,8 @@ const Game = () => {
         // getRowCol located in src/helpers
         let startRowCol = getRowCol(firstClick);
         let endRowCol = getRowCol(secondClick);
-        let chosenAlgo = document.querySelector('input[name="algo"]:checked').id
-        const solution = solve(startRowCol, endRowCol, chosenAlgo);
+        const [solution, explored] = solve(startRowCol, endRowCol);
+        convertExploredObject(explored);
         return printRoute(solution);    
     }
 
