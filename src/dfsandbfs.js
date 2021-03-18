@@ -54,6 +54,7 @@ export const solve = (start, end) => {
     const frontier = new QueueFrontier();
     let node;
     const explored = {};
+    let exploredCounter = 0;
     const frontierStates = {};
 
     // Add our start node into the frontier and mark it as seen
@@ -76,10 +77,11 @@ export const solve = (start, end) => {
             actions.reverse(); 
             cells.reverse();
             cells.pop() // Remove last cell which is the end node
-            return cells;
+            return [cells, explored];
         } 
         // Mark current node as explored
-        explored[node.state.toString()] = true;
+        explored[node.state.toString()] = exploredCounter;
+        exploredCounter ++;
 
         const neighbors = findNeighbors(node.state[0], node.state[1]);
 
