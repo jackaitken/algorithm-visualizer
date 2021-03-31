@@ -51,7 +51,7 @@ class QueueFrontier extends StackFrontier {
 export const solve = (start, end) => {
     const firstNode = new Node(start, null, null);
     const endNode = end;
-    const frontier = new QueueFrontier();
+    const frontier = new StackFrontier();
     let node;
     const explored = {};
     let exploredCounter = 0;

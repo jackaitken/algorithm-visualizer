@@ -49,9 +49,9 @@ const Game = () => {
             setClearBoardVisibility('block');
 
             // Reset all squares after clear board
-        } else if (solvedRoute == null) {
+        } else if (solvedRoute === null) {
             board.forEach(cell => {
-                if (cell != null) {
+                if (cell !== null) {
                     document.getElementsByTagName('button')[cell].style.backgroundColor = 'rgb(188, 187, 186)';
                     document.getElementsByTagName('button')[cell].id = 'square';
                 }
@@ -85,7 +85,7 @@ const Game = () => {
         }
     }
 
-    const beginVisualization = (event) => {
+    const beginVisualization = event => {
         event.preventDefault();
         setBeginButtonVisibility('none');
 
@@ -97,7 +97,7 @@ const Game = () => {
         return printRoute(solution);    
     }
 
-    const printRoute = (array) => {
+    const printRoute = array => {
         let cellArray = []
         for (let i of array) {
             let cell = getCellFromRowCol(i[0], i[1]) // getCellFromRowCol located in src/helpers
@@ -106,8 +106,9 @@ const Game = () => {
         setSolvedRoute(cellArray);
     }
 
-    const clearBoard  = (event) => {
+    const clearBoard = event => {
         event.preventDefault();
+        
         // Reset all state
         setFirstClick(null);
         setSecondClick(null);
