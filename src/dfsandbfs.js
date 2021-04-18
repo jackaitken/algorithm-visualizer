@@ -49,13 +49,13 @@ class QueueFrontier extends StackFrontier {
 }
 
 export const solve = (start, end) => {
-    const firstNode = new Node(start, null, null);
-    const endNode = end;
-    const frontier = new StackFrontier();
+    let firstNode = new Node(start, null, null);
+    let endNode = end;
+    let frontier = new QueueFrontier();
     let node;
-    const explored = {};
+    let explored = {};
     let exploredCounter = 0;
-    const frontierStates = {};
+    let frontierStates = {};
 
     // Add our start node into the frontier and mark it as seen
     frontier.add(firstNode);
@@ -83,10 +83,10 @@ export const solve = (start, end) => {
         explored[node.state.toString()] = exploredCounter;
         exploredCounter ++;
 
-        const neighbors = findNeighbors(node.state[0], node.state[1]);
+        let neighbors = findNeighbors(node.state[0], node.state[1]);
 
         // Add neighbor if it hasn't been explored
-        for (const [action, state] of Object.entries(neighbors)) {
+        for (let [action, state] of Object.entries(neighbors)) {
             if (!(state.toString() in explored)) {
                 // If using a Queue, check that it's not in frontier
                 if (frontier.constructor.name === 'QueueFrontier') {
@@ -102,15 +102,15 @@ export const solve = (start, end) => {
     };
 };
 
-export const findNeighbors = (row, col) => {
-    const possibleSquares = {
+export let findNeighbors = (row, col) => {
+    let possibleSquares = {
         'up': [row - 1, col],
         'down': [row + 1, col],
         'left': [row, col - 1],
         'right': [row, col + 1]
     };
 
-    const results = {};
+    let results = {};
     for (let i of Object.entries(possibleSquares)) {
         if (i[1][0] === -1 || i[1][1] === -1) {
             continue;

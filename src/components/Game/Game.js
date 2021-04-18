@@ -62,13 +62,13 @@ const Game = () => {
         }
     }, [solvedRoute]);
 
-    const handleClick = (i) => {
+    let handleClick = (i) => {
         // Exit if clicked more than twice
         if (handleClickCounter === 2){
             return;
         } 
         setHandleClickCounter(handleClickCounter + 1);
-        const copyOfBoard = [...board];
+        let copyOfBoard = [...board];
 
         if (firstClick || firstClick === 0) {
             document.getElementsByTagName('button')[i].id = 'second-click';
@@ -85,7 +85,7 @@ const Game = () => {
         }
     }
 
-    const beginVisualization = event => {
+    let beginVisualization = event => {
         event.preventDefault();
         setBeginButtonVisibility('none');
 
@@ -97,7 +97,7 @@ const Game = () => {
         return printRoute(solution);    
     }
 
-    const printRoute = array => {
+    let printRoute = array => {
         let cellArray = []
         for (let i of array) {
             let cell = getCellFromRowCol(i[0], i[1]) // getCellFromRowCol located in src/helpers
@@ -106,7 +106,7 @@ const Game = () => {
         setSolvedRoute(cellArray);
     }
 
-    const clearBoard = event => {
+    let clearBoard = event => {
         event.preventDefault();
         
         // Reset all state

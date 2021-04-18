@@ -1,8 +1,8 @@
-export const getRowCol = (i) => {
-    const row = Math.floor(i / 50);
+export let getRowCol = (i) => {
+    let row = Math.floor(i / 50);
 
     if (i < 50) {
-        const col = i;
+        let col = i;
         return [row, col];
     } else {
         let counter = 0;
@@ -10,24 +10,24 @@ export const getRowCol = (i) => {
             counter += 50
         }
         if (counter === i) {
-            const col = 0;
+            let col = 0;
             return [row, col];
         } else {
-            const col = (i - counter);
+            let col = (i - counter);
             return [row, col];
         }
     }
 } 
 
-export const getCellFromRowCol = (row, col) => {
+export let getCellFromRowCol = (row, col) => {
     return (row * 50) + col;
 }
 
-export const convertExploredObject = (exploredNodes) => {
-    const sortedObject = Object.entries(exploredNodes);
+export let convertExploredObject = (exploredNodes) => {
+    let sortedObject = Object.entries(exploredNodes);
     console.log(sortedObject);
-    const exploredNodesArray = [];
-    for (const [cells, index] of sortedObject) {
+    let exploredNodesArray = [];
+    for (let [cells, index] of sortedObject) {
         let convertedCell = getCellFromRowCol(cells[0], cells[1])
         exploredNodesArray.push(convertedCell);
     }
