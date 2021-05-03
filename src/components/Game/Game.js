@@ -31,17 +31,17 @@ const Game = () => {
 
     useEffect(() => {
         const copyOfBoard = [...board];
-        const solvedCells = [];
         if (solvedRoute) {
             if (solvedRoute !== 'orange') {
-                solvedRoute.forEach(cell => {
-                    solvedCells.push(document.getElementsByTagName('button')[cell]);
-                    copyOfBoard[cell] = cell;
-                    setBoard(copyOfBoard);
-                });
-                
-                solvedCells.forEach(function(cell, index) {
-                    setTimeout(function() {
+              let solvedCells = solvedRoute.reduce((arr, cell) => {
+                arr.push(document.getElementsByTagName('button')[cell]);
+                copyOfBoard[cell] = cell;
+                setBoard(copyOfBoard);
+                return arr;
+              }, []);
+
+                solvedCells.forEach((cell, index) => {
+                    setTimeout(() => {
                         setSolvedRoute(cell.style.backgroundColor = 'orange');
                     }, 20 * (index + 1));
                 })
@@ -62,7 +62,7 @@ const Game = () => {
         }
     }, [solvedRoute]);
 
-    let handleClick = (i) => {
+    let handleClick = i => {
         // Exit if clicked more than twice
         if (handleClickCounter === 2){
             return;

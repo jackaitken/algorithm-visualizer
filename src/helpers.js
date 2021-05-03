@@ -1,4 +1,4 @@
-export let getRowCol = (i) => {
+export let getRowCol = i => {
     let row = Math.floor(i / 50);
 
     if (i < 50) {
@@ -23,11 +23,11 @@ export let getCellFromRowCol = (row, col) => {
     return (row * 50) + col;
 }
 
-export let convertExploredObject = (exploredNodes) => {
-    let sortedObject = Object.entries(exploredNodes);
-    console.log(sortedObject);
+export let convertExploredObject = exploredNodes => {
+    let sortedObject = Object.keys(exploredNodes);
     let exploredNodesArray = [];
-    for (let [cells, index] of sortedObject) {
+    for (let cells of sortedObject) {
+        console.log(cells);
         let convertedCell = getCellFromRowCol(cells[0], cells[1])
         exploredNodesArray.push(convertedCell);
     }
